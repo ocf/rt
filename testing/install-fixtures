@@ -1,0 +1,6 @@
+#!/bin/bash -eux
+mysqld &
+sleep 5
+rt-setup-database --action init --dba root --dba-password ''
+pkill mysqld
+wait

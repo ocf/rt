@@ -12,3 +12,7 @@ push-image: cook-image
 .PHONY: start-dev
 start-dev: cook-image
 	docker run --rm -ti $(DOCKER_TAG)
+
+.PHONY: test
+test:
+	tox
