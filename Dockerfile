@@ -7,6 +7,7 @@ RUN apt-get update \
         apache2 \
         cpanminus \
         libapache2-mod-auth-kerb \
+        libapache2-mod-rpaf \
         # For building RT modules from CPAN
         make \
         request-tracker4 \
@@ -21,8 +22,7 @@ RUN cpanm install RT::Extension::MergeUsers \
 COPY apache2/ /etc/apache2/
 COPY run /opt/rt/
 COPY 99-ocf /etc/request-tracker4/RT_SiteConfig.d/
-RUN a2enmod headers rewrite ssl
+RUN a2enmod headers rewrite rpaf
 
 EXPOSE 80
-EXPOSE 443
 CMD ["/opt/rt/run"]
