@@ -22,11 +22,9 @@ node('slave') {
 
 // deploy to prod
 if (env.BRANCH_NAME == 'master') {
-    stage name: 'deploy-to-prod'
-
     def version = new Date().format("yyyy-MM-dd-'T'HH-mm-ss")
     withEnv(["DOCKER_TAG=docker-push.ocf.berkeley.edu/rt:${version}"]) {
-        // build image
+        stage name: 'build-prod-image'
         node('slave') {
             unstash 'src'
             dir('src') {
@@ -34,7 +32,7 @@ if (env.BRANCH_NAME == 'master') {
             }
         }
 
-        // push to Docker registry
+        stage name: 'push-to-registry'
         node('deploy') {
             unstash 'src'
             dir('src') {
@@ -43,9 +41,9 @@ if (env.BRANCH_NAME == 'master') {
         }
     }
 
-    // deploy to marathon
+    stage name: 'deploy-to-prod'
     build job: 'marathon-deploy-app', parameters: [
-        [$class: 'StringParameterValue', name: 'app', value: 'app'],
+        [$class: 'StringParameterValue', name: 'app', value: 'rt'],
         [$class: 'StringParameterValue', name: 'version', value: version],
     ]
 }
