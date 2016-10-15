@@ -6,13 +6,8 @@ cook-image:
 	docker build -t $(DOCKER_TAG) .
 
 .PHONY: push-image
-push-image: DOCKER_TAG := docker-push.ocf.berkeley.edu/rt:$(VERSION)
 push-image: cook-image
 	docker push $(DOCKER_TAG)
-
-.PHONY: deploy
-deploy: push-image
-	ocf-marathon deploy-app rt $(VERSION)
 
 .PHONY: start-dev
 start-dev: cook-image
