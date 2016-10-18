@@ -1,3 +1,6 @@
+stage name: 'clean-workspace'
+step([$class: 'WsCleanup'])
+
 // check out code
 stage name: 'check-out-code'
 
