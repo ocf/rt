@@ -1,9 +1,10 @@
 stage name: 'clean-workspace'
-step([$class: 'WsCleanup'])
+node('slave') {
+    step([$class: 'WsCleanup'])
+}
 
 // check out code
 stage name: 'check-out-code'
-
 node('slave') {
     dir('src') {
         checkout scm
