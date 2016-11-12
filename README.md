@@ -1,5 +1,7 @@
 # Request Tracker
 
+[![Build Status](https://jenkins.ocf.berkeley.edu/buildStatus/icon?job=rt/master)](https://jenkins.ocf.berkeley.edu/job/rt/job/master/)
+
 `rt` is the OCF's ticketing system, used both for internal tickets as well as
 for our public email lists.
 
