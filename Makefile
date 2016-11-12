@@ -3,7 +3,7 @@ VERSION := $(shell date +"%Y-%m-%d-T%H-%M-%S")
 
 .PHONY: cook-image
 cook-image:
-	docker build -t $(DOCKER_TAG) .
+	docker build --pull -t $(DOCKER_TAG) .
 
 .PHONY: push-image
 push-image: cook-image
