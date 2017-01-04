@@ -16,8 +16,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cpanm install RT::Extension::MergeUsers \
-    && cpanm install RT::Extension::CommandByMail \
+RUN cpanm RT::Extension::MergeUsers RT::Extension::CommandByMail \
     && update-rt-siteconfig-4
 COPY apache2/ /etc/apache2/
 COPY run /opt/rt/
