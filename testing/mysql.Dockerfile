@@ -6,7 +6,6 @@ RUN apt-get update \
         mysql-server \
         request-tracker4 \
         rt4-db-mysql \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 COPY 98-ocfdb /etc/request-tracker4/RT_SiteConfig.d/98-ocfdb

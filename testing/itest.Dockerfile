@@ -7,7 +7,6 @@ RUN apt-get update \
         python3 \
         python3-pytest \
         python3-requests \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 COPY /itest.py /root/

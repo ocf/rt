@@ -13,7 +13,6 @@ RUN apt-get update \
         request-tracker4 \
         rt4-apache2 \
         rt4-db-mysql \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN cpanm RT::Extension::MergeUsers RT::Extension::CommandByMail \
