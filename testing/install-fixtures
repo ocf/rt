@@ -1,6 +1,11 @@
 #!/bin/bash -eux
-mysqld &
-sleep 5
+mkdir -p /var/run/mysqld
+mysqld --user=root &
+sleep 10
+mysql <<EOF
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF
 rt-setup-database --action init --dba root --dba-password ''
-pkill mysqld
+killall mysqld
 wait

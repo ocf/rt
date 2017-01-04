@@ -1,4 +1,4 @@
-FROM docker.ocf.berkeley.edu/theocf/debian:jessie
+FROM docker.ocf.berkeley.edu/theocf/debian:stretch
 
 COPY request-tracker4.preseed /tmp/request-tracker4.preseed
 RUN debconf-set-selections /tmp/request-tracker4.preseed
@@ -8,7 +8,9 @@ RUN apt-get update \
         cpanminus \
         libapache2-mod-auth-kerb \
         libapache2-mod-rpaf \
-        # For building RT modules from CPAN
+        libapache2-mod-perl2 \
+        # The next two are for building RT modules from CPAN
+        libmodule-install-perl \
         make \
         request-tracker4 \
         rt4-apache2 \

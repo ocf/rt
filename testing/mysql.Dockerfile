@@ -1,5 +1,5 @@
 # A MySQL database with RT fixtures loaded.
-FROM docker.ocf.berkeley.edu/theocf/debian:jessie
+FROM docker.ocf.berkeley.edu/theocf/debian:stretch
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -14,6 +14,6 @@ COPY install-fixtures /root/
 RUN update-rt-siteconfig-4
 RUN /root/install-fixtures
 
-CMD ["mysqld"]
+CMD ["mysqld", "--user=root"]
 
 # vim: ft=Dockerfile
