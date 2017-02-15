@@ -17,8 +17,7 @@ RUN apt-get update \
         rt4-db-mysql \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cpanm RT::Extension::MergeUsers RT::Extension::CommandByMail \
-    && update-rt-siteconfig-4
+RUN cpanm RT::Extension::MergeUsers RT::Extension::CommandByMail
 COPY apache2/ /etc/apache2/
 COPY run /opt/rt/
 COPY 99-ocf /etc/request-tracker4/RT_SiteConfig.d/

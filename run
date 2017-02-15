@@ -6,5 +6,4 @@
 cp /opt/share/secrets/rt/rt-db /etc/request-tracker4/RT_SiteConfig.d/98-ocfdb
 cp /opt/share/secrets/rt/rt.keytab /tmp/rt.keytab
 chown www-data:root /tmp/rt.keytab
-update-rt-siteconfig-4
 exec apachectl -d /etc/apache2 -f apache2.conf -e info -DFOREGROUND
