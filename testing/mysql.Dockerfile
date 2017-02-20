@@ -8,7 +8,7 @@ RUN apt-get update \
         rt4-db-mysql \
     && rm -rf /var/lib/apt/lists/*
 
-COPY 98-ocfdb /etc/request-tracker4/RT_SiteConfig.d/98-ocfdb
+COPY 98-ocfdb.pm /etc/request-tracker4/RT_SiteConfig.d/98-ocfdb.pm
 COPY install-fixtures /root/
 
 RUN /root/install-fixtures
