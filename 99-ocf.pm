@@ -16,7 +16,8 @@ Set($WebRemoteUserGecos, undef);
 
 # Plugins
 Set(@MailPlugins, qw(Auth::MailFrom Filter::TakeAction));
-Set(@Plugins,(qw(RT::Extension::CommandByMail RT::Extension::MergeUsers)));
+Plugin('RT::Extension::CommandByMail');
+Plugin('RT::Extension::MergeUsers');
 
 # Make links clicky
 Set(@Active_MakeClicky, qw(httpurl_overwrite));
@@ -25,8 +26,8 @@ Set(@Active_MakeClicky, qw(httpurl_overwrite));
 Set($UseFriendlyToLine, 1);
 
 # Enable fulltext search without indexes.
-# For indexed FTS, we would need to recompile MySQL with Sphinx; instead, we
-# just use unindexed FTS which, although really slow, at least works.
+# TODO: set up indexing; requires a regular cronjob/chronos task to update the
+# indices
 Set( %FullTextSearch,
     Enable     => 1,
     Indexed    => 0

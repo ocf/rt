@@ -20,7 +20,7 @@ RUN apt-get update \
 RUN cpanm RT::Extension::MergeUsers RT::Extension::CommandByMail
 COPY apache2/ /etc/apache2/
 COPY run /opt/rt/
-COPY 99-ocf /etc/request-tracker4/RT_SiteConfig.d/
+COPY 99-ocf.pm /etc/request-tracker4/RT_SiteConfig.d/
 RUN a2enmod headers rewrite rpaf
 
 EXPOSE 80
