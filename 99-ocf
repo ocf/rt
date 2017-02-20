@@ -40,3 +40,7 @@ Set($MessageBoxWidth, 72);
 
 # Automatically add CC from original email
 Set($ParseNewMessageForTicketCcs, 1);
+
+# Show more than 12000 characters (the default) before getting a message about
+# the message body being too large
+Set($MaxInlineBody, 100000);
