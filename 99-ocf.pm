@@ -15,7 +15,7 @@ Set($WebRemoteUserAutocreate, 1);
 Set($WebRemoteUserGecos, undef);
 
 # Plugins
-Set(@MailPlugins, qw(Auth::MailFrom Filter::TakeAction));
+Set(@MailPlugins, qw(Auth::MailFrom Action::CommandByMail));
 Plugin('RT::Extension::CommandByMail');
 Plugin('RT::Extension::MergeUsers');
 
