@@ -4,6 +4,7 @@ try {
         step([$class: 'WsCleanup'])
     }
 
+
     // check out code
     stage name: 'check-out-code'
     node('slave') {
@@ -16,7 +17,6 @@ try {
 
     // run tests
     stage name: 'test'
-
     node('slave') {
         unstash 'src'
         dir('src') {
@@ -53,13 +53,18 @@ try {
         ]
     }
 } catch (err) {
+    def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - Failure!"
     def message = "${env.JOB_NAME} (#${env.BUILD_NUMBER}) failed: ${env.BUILD_URL}"
 
-    slackSend color: '#FF0000', message: message
-
-    mail to: 'root@ocf.berkeley.edu',
-      subject: "${env.JOB_NAME} - Build #${env.BUILD_NUMBER} - Failure!",
-      body: message
+    if (env.BRANCH_NAME == 'master') {
+        slackSend color: '#FF0000', message: message
+        mail to: 'root@ocf.berkeley.edu', subject: subject, body: message
+    } else {
+        mail to: emailextrecipients([
+            [$class: 'CulpritsRecipientProvider'],
+            [$class: 'DevelopersRecipientProvider']
+        ]), subject: subject, body: message
+    }
 
     throw err
 }
