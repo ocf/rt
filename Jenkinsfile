@@ -1,3 +1,17 @@
+if (env.BRANCH_NAME == 'master') {
+    properties([
+        pipelineTriggers([
+            triggers: [
+                [
+                    $class: 'jenkins.triggers.ReverseBuildTrigger',
+                    upstreamProjects: 'dockers/master', threshold: hudson.model.Result.SUCCESS,
+                ],
+            ]
+        ]),
+    ])
+}
+
+
 try {
     stage name: 'clean-workspace'
     node('slave') {
