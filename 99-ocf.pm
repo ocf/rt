@@ -18,6 +18,7 @@ Set($WebRemoteUserGecos, undef);
 Set(@MailPlugins, qw(Auth::MailFrom Action::CommandByMail));
 Plugin('RT::Extension::CommandByMail');
 Plugin('RT::Extension::MergeUsers');
+Plugin('RT::Extension::Tags');
 
 # Make links clicky
 Set(@Active_MakeClicky, qw(httpurl_overwrite));
