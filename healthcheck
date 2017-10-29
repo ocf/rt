@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+
+resp=$(curl -s -d @- https://rt.ocf.berkeley.edu/REST/1.0/ticket/1/view <<EOF
+user=create&pass=$(cat /opt/share/secrets/rt/healthcheck.passwd)
+EOF
+)
+
+grep -q "200 Ok" <<< "$resp" && grep -q "^Subject: Hello World$" <<< "$resp"
