@@ -2,16 +2,16 @@
 set -euo pipefail
 
 if [ $# -ne 2 ]; then
-    echo "Usage: $0 HOST PORT
-
-Healthcheck for the RT docker container."
+    echo "Usage: $0 HOST PORT"
+    echo
+    echo "Healthcheck for the RT docker container."
     exit 1
 fi
 
 host="$1"
 port="$2"
 
-resp=$(curl -s -d @- -H "Host: rt.ocf.berkeley.edu" \
+resp=$(curl -sf -d @- -H "Host: rt.ocf.berkeley.edu" \
        "http://$host:$port/REST/1.0/ticket/1/view" <<EOF
 user=create&pass=$(cat /opt/share/secrets/rt/healthcheck.passwd)
 EOF
