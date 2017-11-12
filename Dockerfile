@@ -21,7 +21,7 @@ RUN cpanm RT::Extension::MergeUsers \
           RT::Extension::CommandByMail \
           RT::Extension::Tags
 COPY apache2/ /etc/apache2/
-COPY run /opt/rt/
+COPY run healthcheck /opt/rt/
 COPY 99-ocf.pm /etc/request-tracker4/RT_SiteConfig.d/
 RUN a2enmod headers rewrite rpaf
 
