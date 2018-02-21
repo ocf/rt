@@ -19,7 +19,8 @@ RUN apt-get update \
 
 RUN cpanm RT::Extension::MergeUsers \
           RT::Extension::CommandByMail \
-          RT::Extension::Tags
+          RT::Extension::Tags \
+          MasonX::Profiler
 COPY apache2/ /etc/apache2/
 COPY run healthcheck /opt/rt/
 COPY 99-ocf.pm /etc/request-tracker4/RT_SiteConfig.d/
