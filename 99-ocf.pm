@@ -47,6 +47,11 @@ Set($ParseNewMessageForTicketCcs, 1);
 # the message body being too large
 Set($MaxInlineBody, 100000);
 
+# Switch to autocomplete box for owners. RT will do this automatically, but it
+# should help with performance to just premptively set it here to not have to
+# query for a list of users before the page loads.
+Set($AutocompleteOwners, 1);
+
 # Enable a profiler to show how long page loads take and what they spend the
 # most time on so we can try to make RT faster to load
 use MasonX::Profiler;
