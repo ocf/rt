@@ -1,0 +1,10 @@
+--- a/share/html/Elements/ShowTransaction	2018-03-23 03:06:31.195254662 -0700
++++ b/share/html/Elements/ShowTransaction	2018-07-09 00:42:46.146063000 -0700
+@@ -172,6 +172,7 @@
+         && ( $can_modify
+             || $Object->CurrentUserHasRight( $has_right{'ReplyTo'} )
+         )
++        && $txn_type ne 'Comment'
+     ) {
+         push @actions, {
+             class  => "reply-link",
