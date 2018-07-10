@@ -12,6 +12,7 @@ RUN apt-get update \
         # The next two are for building RT modules from CPAN
         libmodule-install-perl \
         make \
+        patch \
         request-tracker4 \
         rt4-apache2 \
         rt4-db-mysql \
@@ -25,6 +26,8 @@ COPY apache2/ /etc/apache2/
 COPY run healthcheck /opt/rt/
 COPY 99-ocf.pm /etc/request-tracker4/RT_SiteConfig.d/
 RUN a2enmod headers rewrite rpaf
+COPY hide-reply-link-for-comments.patch /tmp/
+RUN cd /usr/share/request-tracker4 && patch -p2 < /tmp/hide-reply-link-for-comments.patch
 
 EXPOSE 80
 CMD ["/opt/rt/run"]
