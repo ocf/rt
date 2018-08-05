@@ -40,7 +40,7 @@ try {
     // deploy to prod
     if (env.BRANCH_NAME == 'master') {
         def version = new Date().format("yyyy-MM-dd-'T'HH-mm-ss")
-        withEnv(["DOCKER_TAG=docker-push.ocf.berkeley.edu/rt:${version}"]) {
+        withEnv(["DOCKER_REVISION=${version}"]) {
             stage name: 'build-prod-image'
             node('slave') {
                 unstash 'src'
