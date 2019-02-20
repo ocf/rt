@@ -33,5 +33,7 @@ RUN a2enmod headers rewrite rpaf
 COPY hide-reply-link-for-comments.patch /tmp/
 RUN cd /usr/share/request-tracker4 && patch -p2 < /tmp/hide-reply-link-for-comments.patch
 
+ENV SERVER_NAME rt.ocf.berkeley.edu
+
 EXPOSE 80
 CMD ["/opt/rt/run"]
