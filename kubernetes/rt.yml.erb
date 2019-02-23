@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+spec:
+  selector:
+    app: rt
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+  labels:
+    app: rt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rt
+  template:
+    metadata:
+      labels:
+        app: rt
+    spec:
+      containers:
+        - name: rt-nginx
+          image: "docker.ocf.berkeley.edu/rt:<%= version %>"
+          resources:
+            limits:
+              memory: 2048Mi
+              cpu: 500m
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: /opt/share/secrets/rt
+              name: secrets
+          env:
+            - name: SERVER_NAME
+              value: rt.dev-kubernetes.ocf.berkeley.edu
+      volumes:
+        - name: secrets
+          hostPath:
+            path: /opt/share/docker/secrets/rt
+            type: Directory
+
+      dnsPolicy: ClusterFirst
+      dnsConfig:
+        searches:
+          - ocf.berkeley.edu
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: virtual-host-ingress
+spec:
+  rules:
+    - host: rt.dev-kubernetes.ocf.berkeley.edu
+      http:
+        paths:
+          - backend:
+              serviceName: service
+              servicePort: 80
