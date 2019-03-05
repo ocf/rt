@@ -39,7 +39,7 @@ spec:
               name: secrets
           env:
             - name: SERVER_NAME
-              value: rt.dev-kubernetes.ocf.berkeley.edu
+              value: rt.ocf.berkeley.edu
       volumes:
         - name: secrets
           hostPath:
@@ -57,7 +57,7 @@ metadata:
   name: virtual-host-ingress
 spec:
   rules:
-    - host: rt.dev-kubernetes.ocf.berkeley.edu
+    - host: rt.ocf.berkeley.edu
       http:
         paths:
           - backend:
