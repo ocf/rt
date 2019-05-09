@@ -54,7 +54,7 @@ spec:
               - sh
               - '-c'
               - '/opt/rt/healthcheck $SERVICE_SERVICE_HOST $SERVICE_SERVICE_PORT'
-            initialDelaySeconds: 20
+            initialDelaySeconds: 60
             periodSeconds: 5
       volumes:
         - name: secrets
