@@ -46,7 +46,7 @@ spec:
               - sh
               - '-c'
               - '/opt/rt/healthcheck $SERVICE_SERVICE_HOST $SERVICE_SERVICE_PORT'
-            initialDelaySeconds: 10
+            initialDelaySeconds: 120
             periodSeconds: 5
           readinessProbe:
             exec:
@@ -54,7 +54,7 @@ spec:
               - sh
               - '-c'
               - '/opt/rt/healthcheck $SERVICE_SERVICE_HOST $SERVICE_SERVICE_PORT'
-            initialDelaySeconds: 5
+            initialDelaySeconds: 20
             periodSeconds: 5
       volumes:
         - name: secrets
