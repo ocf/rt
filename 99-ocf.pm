@@ -7,7 +7,7 @@ Set($CorrespondAddress , 'root@ocf.berkeley.edu');
 Set($CommentAddress , 'root@ocf.berkeley.edu');
 Set($SetOutgoingMailFrom, 1);
 
-# Use external authentication provided by mod_authnz_pam
+# Use external authentication provided by mod-auth-openidc
 Set($WebRemoteUserAuth , 1);
 Set($WebFallbackToRTLogin, 1);
 # create users automatically if no user matching REMOTE_USER is found

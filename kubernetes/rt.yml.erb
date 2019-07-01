@@ -40,6 +40,16 @@ spec:
           env:
             - name: SERVER_NAME
               value: rt.ocf.berkeley.edu
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: secret
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: encryption_key
       volumes:
         - name: secrets
           hostPath:
@@ -63,3 +73,12 @@ spec:
           - backend:
               serviceName: service
               servicePort: 80
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-secret
+type: Opaque
+stringData:
+  secret: <%= keycloak_secret %>
+  encryption_key: <%= keycloak_encryption_key %>

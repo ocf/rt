@@ -1,9 +1,0 @@
-# Restrict access to groups specified in allowed-groups, currently ocfstaff and opstaff
-
-@include common-auth
-@include common-account
-@include common-password
-@include common-session
-
-# Must be in the ocfstaff group to access
-auth required pam_listfile.so onerr=fail item=group sense=allow file=/opt/rt/allowed-groups
