@@ -18,7 +18,3 @@ start-dev: cook-image
 		-p "$(RANDOM_PORT):80" \
 		-e SERVER_NAME=$(shell hostname -f) \
 		$(DOCKER_TAG)
-
-.PHONY: test
-test:
-	tox
