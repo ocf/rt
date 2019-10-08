@@ -56,3 +56,5 @@ Set($AutocompleteOwners, 1);
 # most time on so we can try to make RT faster to load
 use MasonX::Profiler;
 Set(@MasonParameters, (preamble => 'my $p = MasonX::Profiler->new($m, $r);'));
+
+Set($DefaultSearchResultOrder, 'DESC')
