@@ -19,7 +19,7 @@ Set($ExternalInfoPriority, ['ldap']);
 Set($ExternalSettings, {
 	'ldap' => {
 		'type'             =>  'ldap',
-		'server'           =>  'ldap.ocf.berkeley.edu',
+		'server'           =>  'ldaps://ldap.ocf.berkeley.edu',
 		'tls'              => {
 		    'verify' => 'require',
 		    'cafile' => '/etc/ssl/certs/ca-certificates.crt',
