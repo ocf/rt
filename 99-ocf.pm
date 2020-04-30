@@ -15,6 +15,8 @@ Set($WebRemoteUserAutocreate, 1);
 Set($WebRemoteUserGecos, undef);
 
 Set($ExternalInfoPriority, ['ldap']);
+# Allow non-LDAP users (e.g. external Requestors) to be created
+Set($AutoCreateNonExternalUsers, 1);
 # Fetch EmailAddress from the ocfEmail LDAP attribute
 Set($ExternalSettings, {
 	'ldap' => {
