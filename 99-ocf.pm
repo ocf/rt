@@ -14,6 +14,30 @@ Set($WebFallbackToRTLogin, 1);
 Set($WebRemoteUserAutocreate, 1);
 Set($WebRemoteUserGecos, undef);
 
+Set($ExternalInfoPriority, ['ldap']);
+# Allow non-LDAP users (e.g. external Requestors) to be created
+Set($AutoCreateNonExternalUsers, 1);
+# Fetch EmailAddress from the ocfEmail LDAP attribute
+Set($ExternalSettings, {
+	'ldap' => {
+		'type'             =>  'ldap',
+		'server'           =>  'ldaps://ldap.ocf.berkeley.edu',
+		'tls'              => {
+		    'verify' => 'require',
+		    'cafile' => '/etc/ssl/certs/ca-certificates.crt',
+		},
+		'base'             =>  'ou=People,dc=OCF,dc=Berkeley,dc=EDU',
+		'filter'           =>  '(objectClass=ocfAccount)',
+		'attr_match_list'  => [
+		    'Name',
+		],
+		'attr_map' => {
+		    'Name'         => 'uid',
+		    'EmailAddress' => 'ocfEmail',
+		},
+	},
+} );
+
 # Plugins
 Set(@MailPlugins, qw(Auth::MailFrom Action::CommandByMail));
 Plugin('RT::Extension::CommandByMail');
