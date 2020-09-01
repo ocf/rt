@@ -76,9 +76,4 @@ Set($MaxInlineBody, 100000);
 # query for a list of users before the page loads.
 Set($AutocompleteOwners, 1);
 
-# Enable a profiler to show how long page loads take and what they spend the
-# most time on so we can try to make RT faster to load
-use MasonX::Profiler;
-Set(@MasonParameters, (preamble => 'my $p = MasonX::Profiler->new($m, $r);'));
-
 Set($DefaultSearchResultOrder, 'DESC')
