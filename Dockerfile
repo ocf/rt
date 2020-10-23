@@ -6,7 +6,9 @@ RUN apt-get update \
         libapache2-mod-auth-openidc \
         libapache2-mod-rpaf \
         libapache2-mod-perl2 \
-        default-libmysqlclient-dev
+        default-libmysqlclient-dev \
+	msmtp \
+	msmtp-mta
 
 RUN cpanm DBD::mysql
 
@@ -23,8 +25,10 @@ RUN ./configure \
 # These must be installed after RT
 RUN cpanm RT::Extension::MergeUsers \
       RT::Extension::CommandByMail \
-      RT::Extension::Tags
-  
+      RT::Extension::Tags \
+      Net::LDAP
+
+COPY msmtprc /etc/msmtprc
 COPY apache2/ /etc/apache2/
 COPY run healthcheck /opt/rt/
 COPY 99-ocf.pm /opt/rt5/etc/RT_SiteConfig.d 

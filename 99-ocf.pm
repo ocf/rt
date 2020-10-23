@@ -7,6 +7,9 @@ Set($CorrespondAddress , 'root@ocf.berkeley.edu');
 Set($CommentAddress , 'root@ocf.berkeley.edu');
 Set($SetOutgoingMailFrom, 1);
 
+Set($rtname, 'OCF');
+Set($Organization, 'rt.OCF.Berkeley.EDU');
+
 # Use external authentication provided by mod-auth-openidc
 Set($WebRemoteUserAuth , 1);
 Set($WebFallbackToRTLogin, 1);
