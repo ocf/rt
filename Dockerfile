@@ -1,36 +1,43 @@
-FROM docker.ocf.berkeley.edu/theocf/debian:buster
+FROM netsandbox/request-tracker-base
 
-COPY request-tracker4.preseed /tmp/request-tracker4.preseed
-RUN debconf-set-selections /tmp/request-tracker4.preseed
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        apache2 \
-        cpanminus \
+	patch \
         libapache2-mod-auth-openidc \
         libapache2-mod-rpaf \
         libapache2-mod-perl2 \
-        # The next two are for building RT modules from CPAN
-        libmodule-install-perl \
-        make \
-        patch \
-        request-tracker4 \
-        rt4-apache2 \
-        rt4-db-mysql \
-    && rm -rf /var/lib/apt/lists/*
+        default-libmysqlclient-dev \
+	msmtp \
+	msmtp-mta
 
+RUN cpanm DBD::mysql
+
+WORKDIR /usr/local/src
+RUN curl -sSL "https://download.bestpractical.com/pub/rt/release/rt-5.0.0.tar.gz" -o rt.tar.gz \ 
+  && tar -xzf rt.tar.gz
+
+WORKDIR /usr/local/src/rt-5.0.0
+RUN ./configure \
+      --disable-gpg \
+      --disable-smime \
+    && make install
+
+# These must be installed after RT
 RUN cpanm RT::Extension::MergeUsers \
-          RT::Extension::CommandByMail \
-          RT::Extension::Tags \
-          MasonX::Profiler
+      RT::Extension::CommandByMail \
+      RT::Extension::Tags \
+      Net::LDAP
 
+COPY msmtprc /etc/msmtprc
 COPY apache2/ /etc/apache2/
 COPY run healthcheck /opt/rt/
-COPY 99-ocf.pm /etc/request-tracker4/RT_SiteConfig.d/
+COPY 99-ocf.pm /opt/rt5/etc/RT_SiteConfig.d 
 RUN a2enmod headers rewrite rpaf auth_openidc
 COPY hide-reply-link-for-comments.patch /tmp/
-RUN cd /usr/share/request-tracker4 && patch -p2 < /tmp/hide-reply-link-for-comments.patch
+RUN cd / && patch -p1 < /tmp/hide-reply-link-for-comments.patch
 
 ENV SERVER_NAME rt.ocf.berkeley.edu
 
 EXPOSE 80
 CMD ["/opt/rt/run"]
+

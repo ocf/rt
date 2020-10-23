@@ -3,5 +3,5 @@
 # mount in the database secret at run-time.
 #
 # Note also that symlinks do not work in the RT_SiteConfig.d directory.
-cp /opt/share/secrets/rt/rt-db /etc/request-tracker4/RT_SiteConfig.d/98-ocfdb.pm
+cp /opt/share/secrets/rt/rt-db /opt/rt5/etc/RT_SiteConfig.d/98-ocfdb.pm
 exec apachectl -d /etc/apache2 -f apache2.conf -e info -DFOREGROUND
