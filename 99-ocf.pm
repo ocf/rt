@@ -43,6 +43,7 @@ Set($ExternalSettings, {
 
 # Plugins
 Set(@MailPlugins, qw(Auth::MailFrom Action::CommandByMail));
+Plugin('RT::Authen::Token');
 Plugin('RT::Extension::CommandByMail');
 Plugin('RT::Extension::MergeUsers');
 Plugin('RT::Extension::REST2');
@@ -61,6 +62,9 @@ Set( %FullTextSearch,
     Enable     => 1,
     Indexed    => 0
 );
+
+# Disable password prompt when creating authentication tokens
+Set($DisablePasswordForAuthToken, 1);
 
 # Use wrapped plain text instead of HTML email
 Set($MessageBoxRichText, undef);
