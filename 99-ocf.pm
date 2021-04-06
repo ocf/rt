@@ -61,6 +61,9 @@ Set( %FullTextSearch,
     Indexed    => 0
 );
 
+# Disable password prompt when creating authentication tokens
+Set($DisablePasswordForAuthToken, 1);
+
 # Use wrapped plain text instead of HTML email
 Set($MessageBoxRichText, undef);
 Set($PreferRichText, undef);
