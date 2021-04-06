@@ -25,9 +25,7 @@ RUN ./configure \
 # These must be installed after RT
 RUN cpanm RT::Extension::MergeUsers \
       RT::Extension::CommandByMail \
-      RT::Extension::REST2 \
       RT::Extension::Tags \
-      RT::Authen::Token \
       Net::LDAP
 
 COPY msmtprc /etc/msmtprc
