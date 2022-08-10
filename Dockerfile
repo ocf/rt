@@ -6,6 +6,7 @@ RUN apt-get update \
         libapache2-mod-auth-openidc \
         libapache2-mod-rpaf \
         libapache2-mod-perl2 \
+	apache2 \
         default-libmysqlclient-dev \
 	msmtp \
 	msmtp-mta \
