@@ -8,7 +8,8 @@ RUN apt-get update \
         libapache2-mod-perl2 \
         default-libmysqlclient-dev \
 	msmtp \
-	msmtp-mta
+	msmtp-mta \
+	libfcgi-perl
 
 RUN cpanm DBD::mysql
 
