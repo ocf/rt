@@ -113,7 +113,6 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-reco
     libtest-www-mechanize-psgi-perl \
     libwww-mechanize-perl \
     libxml-simple-perl \
-  && rm -rf /var/lib/apt/lists/* \
   && cpanm \
     # RT dependencies
     DBIx::SearchBuilder \
@@ -125,18 +124,18 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-reco
     Module::Install::Substitute \
   && rm -rf /root/.cpanm
 
-RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-	patch \
-        libapache2-mod-auth-openidc \
-        libapache2-mod-rpaf \
-        libapache2-mod-perl2 \
-	apache2 \
-        default-libmysqlclient-dev \
-	msmtp \
-	msmtp-mta \
-	libfcgi-perl
-
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+	    patch \
+      libapache2-mod-auth-openidc \
+      libapache2-mod-rpaf \
+      libapache2-mod-perl2 \
+	    apache2 \
+      default-libmysqlclient-dev \
+	    msmtp \
+	    msmtp-mta \
+	    libfcgi-perl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN cpanm DBD::mysql
 
