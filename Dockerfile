@@ -5,6 +5,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-reco
     curl \
     gcc \
     gnupg \
+    graphviz \
     vim \
     # RT core dependencies
     libapache-session-perl \
