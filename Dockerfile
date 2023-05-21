@@ -15,10 +15,10 @@ RUN apt-get update \
 RUN cpanm DBD::mysql
 
 WORKDIR /usr/local/src
-RUN curl -sSL "https://download.bestpractical.com/pub/rt/release/rt-5.0.3.tar.gz" -o rt.tar.gz \ 
+RUN curl -sSL "https://download.bestpractical.com/pub/rt/release/rt-5.0.4.tar.gz" -o rt.tar.gz \ 
   && tar -xzf rt.tar.gz
 
-WORKDIR /usr/local/src/rt-5.0.3
+WORKDIR /usr/local/src/rt-5.0.4
 RUN ./configure \
       --disable-gpg \
       --disable-smime \
