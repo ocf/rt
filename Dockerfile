@@ -118,6 +118,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-reco
     # RT dependencies
     DBIx::SearchBuilder \
     GnuPG::Interface \
+    GraphViz2 \
     Mozilla::CA \
     Pod::Select \
     # RT extension development dependencies
