@@ -83,3 +83,6 @@ Set($MaxInlineBody, 100000);
 Set($AutocompleteOwners, 1);
 
 Set($DefaultSearchResultOrder, 'DESC')
+
+# Disable search URL shortener
+Set($EnableURLShortener, false);
