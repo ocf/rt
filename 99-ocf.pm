@@ -82,7 +82,7 @@ Set($MaxInlineBody, 100000);
 # query for a list of users before the page loads.
 Set($AutocompleteOwners, 1);
 
-Set($DefaultSearchResultOrder, 'DESC')
+Set($DefaultSearchResultOrder, 'DESC');
 
 # Disable search URL shortener
 Set($EnableURLShortener, 0);
