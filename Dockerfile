@@ -142,10 +142,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 RUN cpanm DBD::mysql
 
 WORKDIR /usr/local/src
-RUN curl -sSL "https://download.bestpractical.com/pub/rt/release/rt-5.0.4.tar.gz" -o rt.tar.gz \ 
+RUN curl -sSL "https://download.bestpractical.com/pub/rt/release/rt-5.0.5.tar.gz" -o rt.tar.gz \ 
   && tar -xzf rt.tar.gz
 
-WORKDIR /usr/local/src/rt-5.0.4
+WORKDIR /usr/local/src/rt-5.0.5
 RUN ./configure \
       --disable-gpg \
       --disable-smime \
