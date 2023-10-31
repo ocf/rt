@@ -139,7 +139,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN cpanm DBD::mysql
+RUN cpanm DBD::mysql@4.051
 
 WORKDIR /usr/local/src
 RUN curl -sSL "https://download.bestpractical.com/pub/rt/release/rt-5.0.5.tar.gz" -o rt.tar.gz \ 
