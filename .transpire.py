@@ -7,16 +7,17 @@ name = "rt"
 auto_sync = True
 
 def objects():
+    dep = Deployment(
+        name="rt",
+        image=get_image_tag("rt"),
+        ports=[80],
+    )
+
     svc = Service(
         name="rt",
         selector=dep.get_selector(),
         port_on_pod=80,
         port_on_svc=80,
-    )
-    dep = Deployment(
-        name="rt",
-        image=get_image_tag("rt"),
-        ports=[80],
     )
 
     ing = Ingress.from_svc(
