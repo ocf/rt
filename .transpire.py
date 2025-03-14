@@ -1,10 +1,16 @@
+from kubernetes import client
+from pathlib import Path
+
 from transpire.resources import Deployment, Ingress, Secret, Service
+from transpire.types import ContainerRegistry, Image
 from transpire.utils import get_image_tag
 
-from kubernetes import client
 
 name = "rt"
 auto_sync = True
+
+def images():
+    yield Image(name="rt", path=Path("/"), registry=ContainerRegistry("ghcr"))
 
 def objects():
     dep = Deployment(
