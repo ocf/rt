@@ -1,4 +1,3 @@
-from kubernetes import client
 from pathlib import Path
 
 from transpire.resources import Deployment, Ingress, Secret, Service
@@ -40,32 +39,17 @@ def objects():
     )
 
     # set the volumes in the Deployment
+
     dep.obj.spec.template.spec.volumes = [
-        client.V1Volume(
-            name="secrets",
-            host_path={ "path": "/opt/share/kubernetes/secret/rt", "type": "Directory" }
-        ),
+        {"name": "secrets", "secret": {"secretName": "keycloak-secret"}},
     ]
+    
+    dep.obj.spec.template.spec.containers[0].volume_mounts = [
+        {"name": "secrets", "mountPath": "/opt/share/secrets/rt"},
+    ]
+    
     # also set the container used in deployment
     dep.obj.spec.template.spec.containers[0].name = "rt-nginx"
-    dep.obj.spec.template.spec.containers[0].env = [
-        client.V1EnvVar(
-            name="SERVER_NAME",
-            value="rt.ocf.berkeley.edu",
-        ),
-        client.V1EnvVar(
-            name="CLIENT_SECRET",
-            value_from=client.V1EnvVarSource(
-                secret_key_ref=client.V1SecretKeySelector(key="secret", name=sec.name)
-            )
-        ),
-        client.V1EnvVar(
-            name="ENCRYPTION_KEY",
-            value_from=client.V1EnvVarSource(
-                secret_key_ref=client.V1SecretKeySelector(key="encryption_key", name=sec.name)
-            )
-        )
-    ]
     dep.obj.spec.template.spec.containers[0].volume_mounts = [
         { "name": "secrets", "mountPath": "/opt/share/secrets/rt" },
     ]
@@ -73,6 +57,8 @@ def objects():
     # and finally set deployment's dns settings.
     dep.obj.spec.template.spec.dns_policy = "ClusterFirst"
     dep.obj.spec.template.spec.dns_config = {"searches": ["ocf.berkeley.edu"]}
+
+    dep.pod_spect().with_secret_env("keycloak-secret")
 
     # build all objects and yield.
     yield svc.build()
