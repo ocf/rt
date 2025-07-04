@@ -58,7 +58,7 @@ def objects():
     dep.obj.spec.template.spec.dns_policy = "ClusterFirst"
     dep.obj.spec.template.spec.dns_config = {"searches": ["ocf.berkeley.edu"]}
 
-    dep.pod_spect().with_secret_env("keycloak-secret")
+    dep.pod_spec().with_secret_env("keycloak-secret")
 
     # build all objects and yield.
     yield svc.build()
