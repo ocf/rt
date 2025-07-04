@@ -116,6 +116,7 @@ RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-reco
     libxml-simple-perl \
   && cpanm \
     # RT dependencies
+    Date::Extract
     DBIx::SearchBuilder \
     GnuPG::Interface \
     GraphViz2 \
