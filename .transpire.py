@@ -33,8 +33,8 @@ def objects():
     sec = Secret(
         name="keycloak-secret",
         string_data={
-            'secret': '',
-            'encryption_key': '',
+            'CLIENT_SECRET': '',
+            'ENCRYPTION_KEY': '',
         }
     )
 
