@@ -31,9 +31,14 @@ def objects():
         path_prefix="/",
     )
     sec = Secret(
-        name="keycloak-secret",
+        name="secret",
         string_data={
-            'keycloak.env': '',
+            'client-cert.pem': '',
+            'client-private-key.pem': '',
+            'healthcheck.passwd': '',
+            'idp-metadata.xml': '',
+            'rt-db': '',
+            'sp-metadata.xml',
         }
     )
 
@@ -48,7 +53,7 @@ def objects():
     # set the volumes in the Deployment
 
     dep.obj.spec.template.spec.volumes = [
-        {"name": "secrets", "secret": {"secretName": "keycloak-secret"}},
+        {"name": "secrets", "secret": {"secretName": "secret"}},
     ]
     
     dep.obj.spec.template.spec.containers[0].volume_mounts = [
