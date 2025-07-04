@@ -1,4 +1,4 @@
-FROM theocf/debian:bullseye-py
+FROM theocf/debian:bookworm
 
 RUN apt-get update && apt-get -y upgrade && apt-get -y install --no-install-recommends \
     cpanminus \
