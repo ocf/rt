@@ -153,9 +153,10 @@ RUN ./configure \
     && make install
 
 # These must be installed after RT
+# RT extension tags installed at <1.0, as 1.0 requires RT 6.0
 RUN cpanm RT::Extension::MergeUsers \
       RT::Extension::CommandByMail \
-      RT::Extension::Tags \
+      RT::Extension::Tags@0.05 \
       Net::LDAP
 
 COPY msmtprc /etc/msmtprc
