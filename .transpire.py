@@ -38,7 +38,7 @@ def objects():
             'healthcheck.passwd': '',
             'idp-metadata.xml': '',
             'rt-db': '',
-            'sp-metadata.xml',
+            'sp-metadata.xml': '',
         }
     )
 
