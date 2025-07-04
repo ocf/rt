@@ -59,6 +59,10 @@ def objects():
     dep.obj.spec.template.spec.containers[0].volume_mounts = [
         {"name": "secrets", "mountPath": "/opt/share/secrets/rt"},
     ]
+
+    dep.obj.spec.template.spec.containers[0].env = [
+        {"name": "SERVER_NAME", "value": "rt.ocf.berkeley.edu"},
+    ]
     
     # also set the container used in deployment
     dep.obj.spec.template.spec.containers[0].name = "rt-nginx"
