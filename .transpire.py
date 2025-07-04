@@ -33,6 +33,13 @@ def objects():
     sec = Secret(
         name="keycloak-secret",
         string_data={
+            'keycloak.env': '',
+        }
+    )
+
+    sec_env = Secret(
+        name="keycloak-env",
+        string_data={
             'CLIENT_SECRET': '',
             'ENCRYPTION_KEY': '',
         }
@@ -58,10 +65,11 @@ def objects():
     dep.obj.spec.template.spec.dns_policy = "ClusterFirst"
     dep.obj.spec.template.spec.dns_config = {"searches": ["ocf.berkeley.edu"]}
 
-    dep.pod_spec().with_secret_env("keycloak-secret")
+    dep.pod_spec().with_secret_env("keycloak-env")
 
     # build all objects and yield.
     yield svc.build()
     yield dep.build()
     yield ing.build()
     yield sec.build()
+    yield sec_env.build()
