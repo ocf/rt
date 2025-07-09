@@ -27,7 +27,7 @@ def objects():
 
     ing = Ingress.from_svc(
         svc=svc,
-        host="rt-dev.ocf.berkeley.edu",
+        host="rt.ocf.berkeley.edu",
         path_prefix="/",
     )
     sec = Secret(
