@@ -86,3 +86,5 @@ Set($DefaultSearchResultOrder, 'DESC');
 
 # Disable search URL shortener
 Set($EnableURLShortener, 0);
+
+Set($LogToScreen, "info");
