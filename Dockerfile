@@ -154,7 +154,7 @@ RUN ./configure \
 
 # These must be installed after RT
 # RT extension tags installed at <1.0, as 1.0 requires RT 6.0
-RUN cpanm RT::Extension::MergeUsers \
+RUN cpanm RT::Extension::MergeUsers@1.12 \
       RT::Extension::CommandByMail \
       RT::Extension::Tags@0.05 \
       Net::LDAP
@@ -163,7 +163,7 @@ COPY msmtprc /etc/msmtprc
 COPY apache2/ /etc/apache2/
 COPY run healthcheck /opt/rt/
 COPY 99-ocf.pm /opt/rt5/etc/RT_SiteConfig.d 
-RUN a2enmod headers rewrite rpaf auth_openidc
+RUN a2enmod headers rewrite rpaf auth_openidc remoteip
 COPY hide-reply-link-for-comments.patch /tmp/
 RUN cd / && patch -p1 < /tmp/hide-reply-link-for-comments.patch
 
